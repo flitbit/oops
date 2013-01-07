@@ -1,7 +1,7 @@
-var oops = require('../').pristine()
+var oops = require('../').noConflict()
 , util = require('util')
 , events = require('events')
-, Declarations = oops.Declarations;
+, Define = oops.Define;
 
 /**
 * Simple observable person object
@@ -15,9 +15,9 @@ function Person(firstname, lastname, middlenames) {
 		middle: middlenames || '-unknown-'
 	};
 
-	(new Declarations(this))
+	(new Define(this))
 	.value('_state', {})
-	.property('first_name', 
+	.property('first_name',
 		function() { return _priv.first; },
 		function(first) {
 			first = first || '-unknown-';
@@ -30,9 +30,9 @@ function Person(firstname, lastname, middlenames) {
 				_priv.first = first;
 				this.emit('property-changed', change);
 			}
-		}, false, true)
+		})
 
-	.property('last_name', 
+	.property('last_name',
 		function() { return _priv.last; },
 		function(last) {
 			last = last || '-unknown-';
@@ -45,9 +45,9 @@ function Person(firstname, lastname, middlenames) {
 				_priv.last = last;
 				this.emit('property-changed', change);
 			}
-		}, false, true)
-	
-	.property('middle_names', 
+		})
+
+	.property('middle_names',
 		function() { return _priv.middle; },
 		function(middle) {
 			middle = middle || '-unknown-';
@@ -60,7 +60,7 @@ function Person(firstname, lastname, middlenames) {
 				_priv.middle = middle;
 				this.emit('property-changed', change);
 			}
-		}, false, true)
+		})
 	;
 }
 oops.inherits(Person, events.EventEmitter);
@@ -69,8 +69,8 @@ oops.inherits(Person, events.EventEmitter);
 * The default fullname formatter.
 */
 function fullnameFormatter( first, last, middle ) {
-	return ''.concat(first, 
-		(last) ? ' '.concat(last) : '', 
+	return ''.concat(first,
+		(last) ? ' '.concat(last) : '',
 		(middle) ? ' '.concat(middle) : '');
 }
 
@@ -80,12 +80,12 @@ function full_name() {
 }
 
 function overrideFormatter( formatter ) {
-	this._state.formatter = formatter;	
+	this._state.formatter = formatter;
 }
 
-(new Declarations(Person))
-.method(overrideFormatter, false, true) 
-.property(full_name, false, true);
+(new Define(Person))
+.method(overrideFormatter)
+.property(full_name);
 
 var me = new Person('willie', 'wonka');
 me.on('property-changed', function(change) {
@@ -102,7 +102,7 @@ me.middle_names = '-ithinknot-';
 me.overrideFormatter(
 function ( first, last, middle ) {
 	return ''.concat(last, ', ',
-		(first) ? ' '.concat(first) : '', 
+		(first) ? ' '.concat(first) : '',
 		(middle) ? ' '.concat(middle) : '');
 });
 
