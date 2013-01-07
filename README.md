@@ -2,6 +2,18 @@
 
 A small library that makes object-oriented programming in javascript a little simpler.
 
+## Installation
+
+```
+npm install node-oops
+```
+
+In a web browser...
+
+```html
+<script src="./build/oops.min.js"></script>
+```
+
 ## Rationale
 The ECMAScript 5 syntax for defining object properties is a bit cumbersome. I'm NOT saying its unusable, not at all... but it does require some concentration, especially when revisiting code written more than a week ago. `oops` was born out of a few helper methods I put together to make more conventional object-orientation simple and understandable. It allows you to define what an object *is*, *has* and *does*.
 
@@ -147,18 +159,6 @@ function Future(val) {
 }
 ```
 Scroll back and forth between the two -- not that either is too complicated, and `oops` is certainly not novel, but the semantic allows you to quickly determine the object's characteristics.
-
-## Installation
-
-```
-npm install node-oops
-```
-
-In a web browser...
-
-```html
-<script src="./build/oops.min.js"></script>
-```
 
 ## Use
 
