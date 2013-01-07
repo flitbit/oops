@@ -1,5 +1,5 @@
 {
-	"name": "oops",
+	"name": "node-oops",
 	"description": "A small library that makes object-oriented programming in javascript a little simpler.",
 	"version": "0.1.0",
 	"keywords": [ "oops", "object-oriented" ],

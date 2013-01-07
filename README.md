@@ -1,4 +1,4 @@
-# Oops - object-oriented programming simplified
+# Oops - object-oriented programming simplified (node-oops)
 
 A small library that makes object-oriented programming in javascript a little simpler.
 
@@ -26,7 +26,7 @@ As already divulged, I code primarily on the server-side, `nodejs` mostly, so `o
 Ponder this object definition, it will take just a minute to comprehend in its entirety.
 
 ```javascript
-var oops = require('oops')
+var oops = require('node-oops')
 , dbc    = oops.dbc
 ;
 /**
@@ -151,7 +151,7 @@ Scroll back and forth between the two -- not that either is too complicated, and
 ## Installation
 
 ```
-npm install oops
+npm install node-oops
 ```
 
 In a web browser...
@@ -165,7 +165,7 @@ In a web browser...
 ###Importing
 
 ```javascript
-var oops = require('oops');
+var oops = require('node-oops');
 ```
 
 ###Specifying Descriptor Properties
@@ -181,7 +181,7 @@ Therefore, if you don't specify otherwise:
 ####Configurable - allowing later redefinition
 
 ```javascript
-var oops = require('oops')
+var oops = require('node-oops')
 , assert = require('assert')
 ;
 
@@ -222,7 +222,7 @@ If you don't define a property as configurable then redefining throws `TypeError
 ####Enumerable - discoverable
 
 ```javascript
-var oops = require('oops')
+var oops = require('node-oops')
 , assert = require('assert')
 ;
 
@@ -266,7 +266,7 @@ JSON serialization is another good example, properties that are not enumerable w
 Well, this one is self explanitory, but here's a proof.
 
 ```javascript
-var oops = require('oops')
+var oops = require('node-oops')
 , assert = require('assert')
 ;
 
@@ -312,7 +312,7 @@ my.defines.enumerable.writable.value('prop', {});
 Further, once you've established CEW you can chain the definitions:
 
 ```javascript
-var oops = require('oops')
+var oops = require('node-oops')
 , dbc    = oops.dbc
 , assert = require('assert')
 ;
@@ -422,7 +422,7 @@ The following is a more involved example. I've mentioned that I prefer letting `
 **_the illustrated `method` definition is about half way down the example_**
 
 ```javascript
-var oops = require('oops')
+var oops = require('node-oops')
 , dbc    = oops.dbc
 , util = require('util')
 ;

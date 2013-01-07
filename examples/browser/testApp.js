@@ -1,3 +1,7 @@
+// This file is imported by the index.html test page.
+// It is my [experimental] AngularJS module for loading and running tests.
+// If you run it from nodejs it will fail.
+
 angular.module('testApp', ['ui.directives'])
 .config(function($routeProvider){
 	$routeProvider
