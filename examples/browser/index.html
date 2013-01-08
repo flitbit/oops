@@ -4,10 +4,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Oops - Self Test</title>
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" />
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="vendor/angular-ui.min.css" />
-	<link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css" type="text/css" />
-	<link rel="stylesheet" href="http://codemirror.net/theme/solarized.css" type="text/css" />
+	<link rel="stylesheet" href="vendor/tomorrow.css" type="text/css" />
 	<!--[if lte IE 8]>
     <script src="vendor/angular-ui-ieshiv.min.js"></script>
 	<![endif]-->
@@ -21,7 +20,7 @@
 	<header class="hero-unit">
 		<h1>Oops!</h1>
 		<p>Oops is a small library that makes javascript <strong>o</strong>bject-<strong>o</strong>riented <strong>p</strong>rogramming <strong>s</strong>impler.</p>
-		<p>This self-test page is a work in progress, testing a library in a browser should be easy -- this pattern using AngularJS and CodeMirror is an experiment but I'm kinda liking the results...</p>
+		<p>This self-test page is a work in progress, testing a library in a browser should be easy -- this pattern using AngularJS is an experiment but I'm kinda liking the results...</p>
 	</header>
 	<section class="container">
 		<div class="row">
@@ -55,7 +54,7 @@
 				<td>
 					<div>
 						<p>{{test.test}}</p>
-						<textarea ui-codemirror="{theme:'solarized light', tabSize: 2, lineNumbers: true, readOnly: true}" ng-model="test.script"></textarea>
+						<pre class="prettyprint lang-js linenums">{{test.script}}</pre>
 					</div>
 				</td>
 				<td class="span2">
@@ -74,11 +73,10 @@
 	<!-- <script src="....//build/oops.js"></script> -->
 	<script type="text/javascript"></script>
 	<script src="vendor/date-utils.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
-	<script src="http://codemirror.net/lib/codemirror.js"></script>
-	<script src="http://codemirror.net/mode/javascript/javascript.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.0.3/angular.min.js"></script>
+	<script src='http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js'></script>
 	<script src="vendor/angular-ui.min.js"></script>
 	<script src="testApp.js"></script>
 	<script class="test" type="text/javascript" test="can declare value on simple object" entrypoint="declaresSimpleValue">function declaresSimpleValue (test) {

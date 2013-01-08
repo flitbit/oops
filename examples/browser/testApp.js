@@ -6,7 +6,8 @@ angular.module('testApp', ['ui.directives'])
 .config(function($routeProvider){
 	$routeProvider
 	.otherwise({redirectTo: '/', templateUrl: 'home.html'})
-});
+})
+;
 
 function TestCtrl ($scope, $timeout, $location, $window) {
 	$scope.resetTests = function() {
@@ -16,7 +17,7 @@ function TestCtrl ($scope, $timeout, $location, $window) {
 			tests.push({
 				test: elm.attr('test'),
 				entrypoint: elm.attr('entrypoint'),
-				script: t.innerText,
+				script: elm.text(),
 				status: 'ready'
 			});
 		});
@@ -26,6 +27,7 @@ function TestCtrl ($scope, $timeout, $location, $window) {
 		$scope.counts.running = 0;
 		$scope.counts.passed = 0;
 		$scope.counts.failed = 0;
+		$timeout(function() { prettyPrint(); }, 0);
 	};
 
 	$scope.runTest = function ( test ) {
