@@ -15,7 +15,7 @@ In a web browser...
 ```
 
 ## Rationale
-The ECMAScript 5 syntax for defining object properties is a bit cumbersome. I'm NOT saying its unusable, not at all... but it does require some concentration, especially when revisiting code written more than a week ago. `oops` was born out of a few helper methods I put together to make more conventional object-orientation simple and understandable. It allows you to define what an object *is*, *has* and *does*.
+The ECMAScript 5 syntax for defining object properties is a bit cumbersome. I'm NOT saying its unusable, not at all... but it does require some concentration, especially when revisiting code written more than a week ago. `oops` was born out of a few helper methods I put together to make object-oriented javascript a bit more understandable and clear. It allows you to define what an object *is*, *has* and *does*.
 
 __Warning #1__
 
