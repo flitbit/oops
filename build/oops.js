@@ -1,13 +1,23 @@
 ;(function(undefined) {
   "use strict";
 
-  var $scope, conflict, conflictResolution = [], obstructions = [];
+  var $scope
+  , inferFromName = function (f) { return f.name; }
+  , conflict, conflictResolution = [], obstructions = [];
   if (typeof global == 'object' && global) {
     $scope = global;
     conflict = global.oops;
   } else if (typeof window !== 'undefined'){
     $scope = window;
     conflict = window.oops;
+    if (typeof (function x(){}).name == 'undefined') {
+      // the environment doens't report an anonymous function's name (IE?)
+      // parse it out of the toString.
+      inferFromName = function(f) {
+        var n = f.toString().match(/^function\s*(?:\s+([\w\$]*))?\s*\(/);
+        return (n) ? n[1] : "";
+      }
+    }
   } else {
     $scope = {};
   }
@@ -109,7 +119,7 @@
         dbc([typeofName === 'string' || typeofName === 'function'], "Either the method or its name must be provided as the first argument.");
         if (typeofName === 'function') {
           dbc([typeof method === 'undefined'], "When the method is given as first argument, additional arguments indicate an error on the part of the caller.");
-          meth(this._it, name.name, name, cloneDesc(this._d));
+          meth(this._it, inferFromName(name), name, cloneDesc(this._d));
         } else {
           dbc([typeof method !== 'undefined'], "When the method's name is provided as the first argument the method must appear as the second.");
           meth(this._it, name, method, cloneDesc(this._d));
@@ -126,7 +136,7 @@
         if (typeofName === 'function') {
           /** When first arg is [Function] treat it as a getter.
           The property's name is taken from the getter. (args shift 1 left) */
-          prop(this._it, name.name, name, get, cloneDesc(this._d));
+          prop(this._it, inferFromName(name), name, get, cloneDesc(this._d));
         } else {
           prop(this._it, name, get, set, cloneDesc(this._d));
         }
@@ -176,7 +186,7 @@
   } else {
     Object.defineProperties(Function.prototype, {
       inherits: {
-        value: 
+        value:
         function (superCtor) {
           inherits(this, superCtor);
           // Prevent multiple inheritance (no intentional support)...
