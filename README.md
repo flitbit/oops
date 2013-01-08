@@ -1,4 +1,4 @@
-# Oops - object-oriented programming simplified (node-oops)
+# Oops - object-oriented programming simplified
 
 A small library that makes object-oriented programming in javascript a little simpler.
 
