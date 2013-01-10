@@ -2,23 +2,24 @@
 
 A small library that makes object-oriented programming in javascript a little simpler.
 
-+ [Installation][]
-+ [Compatability][]
-+ [Example][]
-+ [Use][]
-	+ [Importing][]
-	+ [Specifying Descriptor Properties][]
-		+ [Configurable - allowing later redefinition][]
-		+ [Enumerable - discoverable][]
-		+ [Writable][]
-		+ [Configurable, Enumerable, Writable - all together now][]
-	+ [Defining Values][]
-	+ [Defining Properties][]
-	+ [Defining Methods][]
-	+ [No Conflict][]
-+ API
++ [Installation](#installation)
++ [Compatability](#compatability)
++ [Rationale](#rationale)
++ [Example](#example)
++ [Use](#use)
+	+ [Importing](#importing)
+	+ [Specifying Descriptor Properties](#descriptors)
+		+ [Configurable - allowing later redefinition](#configurable)
+		+ [Enumerable - discoverable](#enumerable)
+		+ [Writable](#writable)
+		+ [Configurable, Enumerable, Writable - all together now](#cew)
+	+ [Defining Values](#dvalues)
+	+ [Defining Properties](#dproperties)
+	+ [Defining Methods](#dmethods)
+	+ [No Conflict](#no-conflict)
++ [API](#api)
 
-
+<a name="#installation"></a>
 ## Installation
 
 ```
@@ -31,6 +32,7 @@ In a web browser...
 <script src="./build/oops.min.js"></script>
 ```
 
+<a name="#rationale"></a>
 ## Rationale
 The ECMAScript 5 syntax for defining object properties is a bit cumbersome. I'm NOT saying its unusable, not at all... but it does require some concentration, especially when revisiting code written more than a week ago. `oops` was born out of a few helper methods I put together to make object-oriented javascript a bit more understandable and clear. It allows you to define what an object *is*, *has* and *does*.
 
@@ -38,6 +40,7 @@ __Warning #1__
 
 Before proceeding you should understand that as I code primarily for the server-side, I purposely chose NOT to support the extremely loose typing that infects the browser-side. Mind you, I enjoy some of those patterns -- they are powerful techniques when used judiciously -- but in order to keep this library small and focused I stuck to bare-bones, classic, type definition stuff. If you find yourself defining types using the ECMAScript 5 `Object.defineProperty(ies)` method, and customizing a property's CEWability (configurable, enumerable, writable), then you're already in the paradigm I'm talking about. If you tend to use object-merge style inheritance rather than classic prototypal inheritance then this library won't be very useful to you.
 
+<a name="#compatability"></a>
 ## Compatability
 
 __Warning #2__
@@ -50,6 +53,7 @@ __Warning #3__
 
 As already divulged, I code primarily on the server-side, `nodejs` mostly, so `oops` is entirely node compatible. This means that you can interchangeably use `util.inherits` and `oops.inherits`, and `(function My(){}).inherits`. All three of these use identical code to establish the prototype chain and each pokes `super_` onto your type/function. I put this warning here so that if you're not already familiar with inheritance the way the node community does it [you can go acquire that knowledge before continuing](http://nodejs.org/api/util.html#util_util_inherits_constructor_superconstructor).
 
+<a name="#example"></a>
 ### Example
 
 Ponder this object definition, it will take just a minute to comprehend in its entirety.
@@ -177,14 +181,17 @@ function Future(val) {
 ```
 Scroll back and forth between the two -- not that either is too complicated, and `oops` is certainly not novel, but the semantic allows you to quickly determine the object's characteristics.
 
+<a name="#use"></a>
 ## Use
 
+<a name="#importing"></a>
 ###Importing
 
 ```javascript
 var oops = require('node-oops');
 ```
 
+<a name="#descriptors"></a>
 ###Specifying Descriptor Properties
 
 The default descriptor properties used by `oops` are identical to ECMAScript 5. If you don't specify otherwise then `configurable`, `enumerable`, and `writable` are false.
@@ -195,6 +202,7 @@ Therefore, if you don't specify otherwise:
 0. The property won't be discovered by methods that enumerate the object's properties,
 0. The property's value can't be modified.
 
+<a name="#configurable"></a>
 ####Configurable - allowing later redefinition
 
 ```javascript
@@ -236,6 +244,7 @@ assert.equal(it.prop, finale);
 
 If you don't define a property as configurable then redefining throws `TypeError` as proved in the next example. In this way you can close a property definition.
 
+<a name="#enumerable"></a>
 ####Enumerable - discoverable
 
 ```javascript
@@ -278,6 +287,7 @@ One notable place where enumerability comes into play is when copy-constructing,
 
 JSON serialization is another good example, properties that are not enumerable won't get serialized by standard libraries.
 
+<a name="#writable"></a>
 ####Writable
 
 Well, this one is self explanitory, but here's a proof.
@@ -317,6 +327,7 @@ not.prop = updated;
 assert.equal(not.prop, value);
 ```
 
+<a name="#cew"></a>
 ####Configurable, Enumerable, Writable - all together now
 
 When defining object properties, you can stack the descriptors and it does what you expect.
@@ -372,6 +383,7 @@ var person = new Person("Bilbo", "Baggins", ["the Thief"]);
 assert.equal(person.fullName, "Baggins, Bilbo the Thief");
 ```
 
+<a name="#dvalues"></a>
 ###Defining Values
 
 A **_value_** is any property that is not backed by a user-supplied getter or setter. All values must be explicitly named because there isn't a reasonable way to infer the name. Since there are so many examples above I'll keep this short:
@@ -380,6 +392,7 @@ A **_value_** is any property that is not backed by a user-supplied getter or se
 my.defines.value('name', value);
 ```
 
+<a name="#dproperties"></a>
 ###Defining Properties
 
 There are options when creating properties. You can make them read-only by providing just the getter, or read-write by providing a getter and a setter. Further, the property's name can be inferred from the name of the getter.
@@ -430,6 +443,7 @@ Object.defineProperty(my, 'name' {
 })
 ```
 
+<a name="#dmethods"></a>
 ###Defining Methods
 
 Defining methods is similar to defining properties. `oops` will infer the name of the method from the function provided, alternately you can specify it.
@@ -493,6 +507,7 @@ setTimeout(function make_room_here_it_comes() {
 }, 1000);
 ```
 
+<a name="#no-conflict"></a>
 ###No Conflict
 
 `oops` supports a no-conflict mode. In this mode you must explicitly create your own instances of the `Define` type... my personal practice is to reassign the factory method `create` to a local variable that mimics the basic semantics of `oops`:
@@ -520,6 +535,7 @@ var bob = new Greeter("Good day");
 bob.greet("Jane");
 ```
 
+<a name="#api"></a>
 ## API
 
 **Methods**
