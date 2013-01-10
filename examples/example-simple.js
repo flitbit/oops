@@ -1,5 +1,5 @@
 ;
-var oops = require('../lib/oops')
+var oops = require('../')
 , util = require('util')
 , events = require('events');
 

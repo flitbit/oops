@@ -1,5 +1,5 @@
 var util = require('util')
-, oops = require('oops').noConflict()
+, oops = require('../').noConflict()
 , Define = oops.Define
 ;
 

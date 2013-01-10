@@ -476,15 +476,41 @@ setTimeout(function make_room_here_it_comes() {
 }, 1000);
 ```
 
+###No Conflict
+
+`oops` supports a no-conflict mode. In this mode you must explicitly create your own instances of the `Define` type... my personal practice is to reassign the factory method `create` to a local variable that mimics the basic semantics of `oops`:
+
+```javascript
+var oops = require('../').noConflict()
+, defines = oops.create
+;
+
+function Favorite(greeting) {
+	defines(this).value('greeting', greeting);
+}
+
+function Greeter(greeting){
+	Greeter.super_.call(this, greeting);
+}
+oops.inherits(Greeter, Favorite);
+
+defines(Greeter).enumerable
+	.method(function greet(who) {
+		console.log("".concat(this.greeting, ' ', who));
+	});
+
+var bob = new Greeter("Good day");
+bob.greet("Jane");
+
 ## API
 
 **Methods**
 
 + `dbc` - a light-weight desing-by-contract method (enforces one or more required conditions).
-+ `create` - Factory method for `oops.Define`. Useful in `pristine` mode.
++ `create` - Factory method for `oops.Define`. Useful in `no-conflict` mode.
 + `inherits` - same as [node's](http://nodejs.org/) [`util.inherits`](http://nodejs.org/api/util.html#util_util_inherits_constructor_superconstructor), redefined to support contexts other than node.
 + `noConflict` - resets the javascript environment to `pristine` mode.
-+ `obstructed` - reports whether a critical feature is obstructed (`defines` and `inherits`)
++ `obstructed` - reports whether a critical feature is obstructed (`defines` or `inherits`)
 
 **Types**
 

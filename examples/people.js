@@ -1,5 +1,5 @@
 var util = require('util')
-, oops = require('oops')
+, oops = require('../')
 ;
 
 function People() {

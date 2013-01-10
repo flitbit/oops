@@ -1,7 +1,8 @@
 var oops = require('../').noConflict()
+, defines = oops.create
 , util = require('util')
 , events = require('events')
-, Define = oops.Define;
+;
 
 /**
 * Simple observable person object
@@ -15,7 +16,7 @@ function Person(firstname, lastname, middlenames) {
 		middle: middlenames || '-unknown-'
 	};
 
-	(new Define(this))
+	defines(this)
 	.value('_state', {})
 	.property('first_name',
 		function() { return _priv.first; },
@@ -83,7 +84,7 @@ function overrideFormatter( formatter ) {
 	this._state.formatter = formatter;
 }
 
-(new Define(Person))
+defines(Person).enumerable
 .method(overrideFormatter)
 .property(full_name);
 

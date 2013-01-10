@@ -1,4 +1,4 @@
-var oops = require('oops')
+var oops = require('../')
 , dbc    = oops.dbc
 , util = require('util')
 ;
