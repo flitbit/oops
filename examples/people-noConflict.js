@@ -1,11 +1,11 @@
 var util = require('util')
 , oops = require('../').noConflict()
-, Define = oops.Define
+, defines = oops.create
 ;
 
 function People() {
 	var storage = {};
-	(new Define(this)).value('_storage', storage);
+	defines(this).value('_storage', storage);
 }
 
 function add(name, person) {
@@ -44,7 +44,7 @@ function find(name) {
 	return it;
 }
 
-(new Define(People)).enumerable
+defines(People).enumerable
 .method(add)
 .method(list)
 .method(find)
