@@ -2,6 +2,23 @@
 
 A small library that makes object-oriented programming in javascript a little simpler.
 
++ [Installation][]
++ [Compatability][]
++ [Example][]
++ [Use][]
+	+ [Importing][]
+	+ [Specifying Descriptor Properties][]
+		+ [Configurable - allowing later redefinition][]
+		+ [Enumerable - discoverable][]
+		+ [Writable][]
+		+ [Configurable, Enumerable, Writable - all together now][]
+	+ [Defining Values][]
+	+ [Defining Properties][]
+	+ [Defining Methods][]
+	+ [No Conflict][]
++ API
+
+
 ## Installation
 
 ```
@@ -501,6 +518,7 @@ defines(Greeter).enumerable
 
 var bob = new Greeter("Good day");
 bob.greet("Jane");
+```
 
 ## API
 
